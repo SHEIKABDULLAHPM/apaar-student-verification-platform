@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="APAAR verification platform">
+  <rect width="64" height="64" rx="14" fill="#1f3550"/>
+  <path d="M32 11 51 19v14c0 11-8 17-19 21-11-4-19-10-19-21V19l19-8Z" fill="#3d75b0"/>
+  <path d="M32 17 46 23v10c0 8-6 13-14 16-8-3-14-8-14-16V23l14-6Z" fill="#f9a21f"/>
+  <path d="m25 32 5 5 10-11" fill="none" stroke="#1f3550" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

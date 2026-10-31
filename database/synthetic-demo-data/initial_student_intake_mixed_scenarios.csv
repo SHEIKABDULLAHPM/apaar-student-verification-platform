@@ -1,0 +1,22 @@
+Student Identifier,Full Name,APAAR ID,Date of Birth,Gender,Admission Category,Admission Date,Student Email,Contact Phone,Guardian Name,Quota Type,Supernumerary,NRI Status,OCI Status,Foreign National
+STU-2024-001,Aarav Sharma,123456789012,2003-05-15,Male,OPEN,2024-08-01,aarav.sharma@example.edu.in,9876543210,Ramesh Sharma,MERIT,false,false,false,false
+STU-2024-002,Priya Sundaram,,2004-02-18,Female,OBC,2024-08-02,priya.sundaram@example.edu.in,9876543211,Sundaram K,STATE_QUOTA,false,false,false,false
+STU-2024-003,Vikramaditya Roy,12345,2003-11-20,Male,OPEN,2024-08-01,vikram.roy@example.edu.in,9876543212,Debabrata Roy,MERIT,false,false,false,false
+STU-2024-004,Neha Patel,1234ABCD5678,2004-07-12,Female,SC,2024-08-03,neha.patel@example.edu.in,9876543213,Mahesh Patel,MERIT,false,false,false,false
+,Rohit Kumar,234567890123,2003-09-09,Male,ST,2024-08-01,rohit.kumar@example.edu.in,9876543214,Rajesh Kumar,STATE_QUOTA,false,false,false,false
+STU-2024-006,,345678901234,2004-01-25,Female,EWS,2024-08-02,missing.name@example.edu.in,9876543215,Anil Mehta,EWS_QUOTA,false,false,false,false
+STU-2024-007,Aditya Verma,456789012345,2003-06-30,Male,,2024-08-03,aditya.verma@example.edu.in,9876543216,Deepak Verma,MERIT,false,false,false,false
+STU-2024-008,Kavita Menon,567890123456,31-02-2003,Female,OPEN,2024-08-01,kavita.menon@example.edu.in,9876543217,Sreedhar Menon,MERIT,false,false,false,false
+STU-2024-009,Arjun Reddy,678901234567,1850-01-01,Male,OBC,2024-08-01,arjun.reddy@example.edu.in,9876543218,Siva Reddy,MANAGEMENT,false,false,false,false
+STU-2024-010,Siddharth Rao,789012345678,2003-08-14,Male,OPEN,invalid-date,sid.rao@example.edu.in,9876543219,Nageswara Rao,MERIT,false,false,false,false
+STU-2024-011,Ananya Deshmukh,890123456789,2004-03-22,Female,OPEN,2099-12-31,ananya.d@example.edu.in,9876543220,Prashant Deshmukh,MERIT,false,false,false,false
+STU-2024-012,Rahul Banerjee,901234567890,2003-10-05,Male,SC,2024-08-02,invalid-email-banerjee,9876543221,Tapan Banerjee,MERIT,false,false,false,false
+STU-2024-013,Meera Iyer,012345678901,2004-04-19,Female,OBC,2024-08-01,meera.iyer@example.edu.in,1234,Ramaswamy Iyer,MERIT,false,false,false,false
+STU-2024-001,Aarav Duplicate,112233445566,2003-05-15,Male,OPEN,2024-08-01,aarav.duplicate@example.edu.in,9876543222,Ramesh Sharma,MERIT,false,false,false,false
+STU-2024-015,Karan Johar,123456789012,2003-12-01,Male,OPEN,2024-08-01,karan.j@example.edu.in,9876543223,Yash Johar,MERIT,false,false,false,false
+STU-2024-016,Tanvi Joshi,223344556677,2004-09-14,Female,Gen,2024-08-02,tanvi.joshi@example.edu.in,9876543224,Milind Joshi,MERIT,false,false,false,false
+STU-2024-017,Zayd Khan,334455667788,2003-07-28,Male,OPEN,2024-08-01,zayd.khan@example.edu.in,9876543225,Tariq Khan,TFW,true,false,false,false
+STU-2024-018,Chen Wei,445566778899,2002-11-11,Male,FOREIGN_NATIONAL,2024-08-05,chen.wei@example.edu.in,9876543226,Chen Ming,SUPERNUMERARY,true,false,false,true
+STU-2024-019,Divya Pillai,556677889900,2003-03-30,Female,NRI,2024-08-04,divya.pillai@example.edu.in,9876543227,Madhavan Pillai,NRI_QUOTA,true,true,false,false
+STU-2024-020,Sanjay Singhania,667788990011,2004-06-18,Male,OCI,2024-08-03,sanjay.s@example.edu.in,9876543228,Gautam Singhania,OCI_QUOTA,true,false,true,false
+

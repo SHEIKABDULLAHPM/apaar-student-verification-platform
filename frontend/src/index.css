@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --surface-page: 244 247 250;
+    --surface-card: 255 255 255;
+    --surface-muted: 238 242 247;
+    --line-subtle: 219 227 236;
+    --ink-strong: 15 27 45;
+    --ink-800: 29 44 66;
+    --ink-700: 51 65 85;
+    --ink-muted: 71 85 105;
+    --ink-soft: 100 116 139;
+    --ink-faint: 148 163 184;
+    --focus-ring: 61 117 176;
+
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-surface font-sans text-ink-900 antialiased;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-brand-200 text-brand-950;
+  }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid rgb(var(--focus-ring));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-ink-800;
+  }
+
+  .field-control {
+    @apply block w-full rounded-md border border-line bg-surface-card px-3 py-2 text-sm text-ink-900 shadow-sm transition-colors placeholder:text-ink-400 hover:border-ink-400 disabled:cursor-not-allowed disabled:bg-surface-muted disabled:text-ink-500;
+  }
+
+  .field-control:focus {
+    @apply border-brand-500 ring-2 ring-brand-500/25;
+    outline: none;
+  }
+
+  .field-control[aria-invalid='true'] {
+    @apply border-danger;
+  }
+
+  .field-control[aria-invalid='true']:focus {
+    @apply ring-danger/20;
+  }
+
+  .surface-card {
+    @apply rounded-xl border border-line bg-surface-card shadow-card;
+  }
+
+  .table-shell {
+    @apply overflow-x-auto rounded-xl border border-line bg-surface-card shadow-card;
+  }
+
+  .table-base {
+    @apply min-w-full divide-y divide-line text-left text-sm;
+  }
+
+  .table-head {
+    @apply bg-surface-muted text-xs font-semibold uppercase tracking-wide text-ink-600;
+  }
+
+  .table-head th {
+    @apply whitespace-nowrap px-4 py-3;
+  }
+
+  .table-row {
+    @apply border-b border-line/70 last:border-0 hover:bg-surface-muted/60;
+  }
+
+  .table-row td {
+    @apply px-4 py-3 align-middle text-ink-700;
+  }
+}

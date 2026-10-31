@@ -1,0 +1,9 @@
+Student Identifier,Full Name,APAAR ID,Date of Birth,Gender,Admission Category,Admission Date,Student Email,Contact Phone,Guardian Name,Quota Type,Supernumerary,NRI Status,OCI Status,Foreign National
+STU-2024-001,Aarav Sharma,123456789012,2003-05-15,Male,OPEN,2024-08-01,aarav.sharma@example.edu.in,9876543210,Ramesh Sharma,MERIT,false,false,false,false
+STU-2024-002,Priya Sundaram,121212121212,2004-02-18,Female,OBC,2024-08-02,priya.new@example.edu.in,9876543299,Sundaram K,STATE_QUOTA,false,false,false,false
+STU-2024-004,Neha Patel,321098765432,2004-07-12,Female,SC,2024-08-03,neha.patel@example.edu.in,9876543213,Mahesh Patel,MERIT,false,false,false,false
+STU-2024-005,Rohit Kumar,432109876543,2003-09-09,Male,ST,2024-08-01,rohit.kumar@example.edu.in,9876543214,Rajesh Kumar,STATE_QUOTA,false,false,false,false
+STU-2024-006,Sneha Mehta,543210987654,2004-01-25,Female,EWS,2024-08-02,sneha.mehta@example.edu.in,9876543215,Anil Mehta,EWS_QUOTA,false,false,false,false
+STU-2024-007,Aditya Verma,654321098765,2003-06-30,Male,OPEN,2024-08-03,aditya.verma@example.edu.in,9876543216,Deepak Verma,MERIT,false,false,false,false
+STU-2024-021,Bhavya Aggarwal,778899001122,2004-05-10,Female,OPEN,2024-08-10,bhavya.a@example.edu.in,9876543250,Rajiv Aggarwal,MERIT,false,false,false,false
+

@@ -1,0 +1,9 @@
+# Runtime dependencies for the APAAR AI service.
+# Versions are pinned and verified on Python 3.12 (Docker) and Python 3.14 (local).
+fastapi==0.128.8
+uvicorn[standard]==0.38.0
+pydantic==2.12.5
+pydantic-settings==2.12.0
+numpy==2.3.5
+pandas==2.3.3
+scikit-learn==1.7.2

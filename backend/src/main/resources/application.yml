@@ -6,6 +6,10 @@ spring:
       - optional:file:../.env[.properties]
       - optional:file:./.env[.properties]
   datasource:
+    # A plain JDBC URL works as-is. Platform connection strings supplied through
+    # SPRING_DATASOURCE_URL, DATABASE_URL, or DB_URL (for example Render's
+    # postgres://user:pass@host:5432/database) are normalised at startup by
+    # DatabaseUrlEnvironmentPostProcessor.
     url: ${SPRING_DATASOURCE_URL:${DB_URL:jdbc:postgresql://localhost:5432/apaar}}
     username: ${SPRING_DATASOURCE_USERNAME:${POSTGRES_USER:apaar}}
     password: ${SPRING_DATASOURCE_PASSWORD:${POSTGRES_PASSWORD:}}

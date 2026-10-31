@@ -1,0 +1,42 @@
+# Render Blueprint for the APAAR backend.
+#
+# Deploy with: Render Dashboard -> New + -> Blueprint -> select this repository.
+# Render provisions the Postgres instance and injects its connection string, so
+# the database name (which Render may suffix, e.g. apaar_x7k2) is never typed by
+# hand. The backend normalises the injected postgres:// URL to JDBC at startup.
+#
+# If you already created the database or web service manually, either rename the
+# entries below to match the existing resources or keep using the dashboard
+# environment variables described in docs/DEPLOY_VERCEL_RENDER.md.
+
+databases:
+  - name: apaar-postgres
+    databaseName: apaar
+    user: apaar
+    plan: free
+    region: singapore
+
+services:
+  - type: web
+    name: apaar-backend
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    region: singapore
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: demo
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: apaar-postgres
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: AUDIT_IP_HASH_SALT
+        generateValue: true
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: UPLOAD_STORAGE_DIR
+        value: /tmp/apaar-uploads

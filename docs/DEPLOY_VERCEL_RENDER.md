@@ -30,6 +30,20 @@ and push those before creating the Render service so it builds the correct code.
 
 ## Part 1 — Backend on Render
 
+### 1.0 Option A — Deploy with the Blueprint (recommended)
+
+The repository contains a `render.yaml` that provisions both the database and
+the web service and wires the database connection automatically:
+
+1. Render Dashboard → **New +** → **Blueprint**.
+2. Select the `SHEIKABDULLAHPM/apaar-student-verification-platform` repository.
+3. When prompted, set `CORS_ALLOWED_ORIGINS` to your Vercel origin
+   (for example `https://your-app.vercel.app`), then apply the Blueprint.
+
+The Blueprint reads the database connection string from Render itself, so the
+suffixed database name (see below) can never drift out of sync. The rest of
+this section describes the equivalent manual setup.
+
 ### 1.1 Create the PostgreSQL database
 
 1. Render Dashboard → **New +** → **Postgres**.
@@ -39,9 +53,19 @@ and push those before creating the Render service so it builds the correct code.
 4. Open the database and copy, from **Connections**:
    - **Hostname** (internal), e.g. `dpg-xxxxxxxx-a`
    - **Port** (`5432`)
-   - **Database** (e.g. `apaar`)
+   - **Database** (e.g. `apaar_x7k2` — see the note below)
    - **Username**
    - **Password**
+
+> **Render may append a random suffix to the database name.** If you request
+> `apaar`, the actual database can become something like `apaar_x7k2`. Always use
+> the value shown under **Connections → Database**, or copy the whole
+> **Internal Database URL**. Typing the name you requested is the most common
+> cause of `FATAL: database "..." does not exist`.
+>
+> The backend accepts Render's `postgres://...` connection string directly, so
+> the simplest option is to copy the **Internal Database URL** and use it as the
+> `SPRING_DATASOURCE_URL` value in step 1.3.
 
 > Use the **Internal** hostname for a Render web service in the same region.
 > The external hostname (`dpg-xxxx.oregon-postgres.render.com`) works too but is
@@ -74,9 +98,9 @@ Add these under **Environment** (or when prompted during creation):
 | :--- | :--- |
 | `SPRING_PROFILES_ACTIVE` | `demo` |
 | `JWT_SECRET` | a random secret, at least 32 bytes: `openssl rand -base64 48` |
-| `SPRING_DATASOURCE_URL` | `jdbc:postgresql://<internal-hostname>:5432/<database>` |
-| `SPRING_DATASOURCE_USERNAME` | database username |
-| `SPRING_DATASOURCE_PASSWORD` | database password |
+| `SPRING_DATASOURCE_URL` | The database's **Internal Database URL** (`postgres://...`) or a JDBC URL (`jdbc:postgresql://<internal-hostname>:5432/<database>`) |
+| `SPRING_DATASOURCE_USERNAME` | database username (optional when the URL embeds credentials) |
+| `SPRING_DATASOURCE_PASSWORD` | database password (optional when the URL embeds credentials) |
 | `CORS_ALLOWED_ORIGINS` | `https://<your-app>.vercel.app` |
 | `AUDIT_IP_HASH_SALT` | a random value: `openssl rand -hex 16` |
 | `UPLOAD_STORAGE_DIR` | `/tmp/apaar-uploads` (ephemeral; optional, this is the default) |
@@ -87,8 +111,15 @@ Notes:
   applies `V100__demo_seed.sql`, which creates the seven roles and the seeded
   users used by the login page and the guest sign-in buttons. Without it the
   database has an empty `users` table and every login returns 401.
-- The datasource URL must start with `jdbc:postgresql://` and include `:5432`.
-  A raw `postgres://...` connection string from the dashboard will **not** work.
+- The datasource URL may be either a JDBC URL (`jdbc:postgresql://...`) or the
+  `postgres://...` / `postgresql://...` connection string copied from Render.
+  The backend normalises platform-style URLs to JDBC at startup. If the URL
+  includes credentials, `SPRING_DATASOURCE_USERNAME` and
+  `SPRING_DATASOURCE_PASSWORD` are optional.
+- Never type the database name by hand. Render can suffix it (for example
+  `apaar` becomes `apaar_x7k2`), so copy the **Internal Database URL** from the
+  database's **Connections** panel. If the database was deleted or its free
+  period expired, create a new database and update the URL.
 - `JWT_SECRET` has no default. The service fails to start without it.
 - Do **not** set `BACKEND_PORT` on Render; Render injects `PORT`, which the app
   now reads first.
@@ -197,7 +228,9 @@ fixes it. No rewrite/proxy is needed on Vercel.
 | :--- | :--- |
 | Render deploy fails at `mvn` | Root Directory was set to `backend`; clear it so `database/` is in the build context. |
 | Service exits: `Could not resolve placeholder 'JWT_SECRET'` | Set `JWT_SECRET` in Render and redeploy. |
-| Startup fails on Hikari/Flyway | Malformed `SPRING_DATASOURCE_URL`; it must be `jdbc:postgresql://host:5432/db`, and the password/username must match the database. |
+| Startup fails on Hikari/Flyway | Malformed or stale `SPRING_DATASOURCE_URL`; use the database's **Internal Database URL** and make sure the password/username match. |
+| `FATAL: database "..." does not exist` | The URL names a database that is not on that Postgres server. Render may suffix the database name, so copy the **Internal Database URL** from **Connections** instead of typing it. If the free database expired or was deleted, create a new one and update the variable. |
+| `Unsupported character encoding` or `No suitable driver` | The URL still uses `postgres://` on a build without the URL normaliser. Deploy the current `main` branch, or convert it to `jdbc:postgresql://...`. |
 | Login returns 401 with demo credentials | Demo profile not active, so no seeded users exist. Set `SPRING_PROFILES_ACTIVE=demo`, redeploy, and check Flyway applied `V100`. |
 | Browser shows CORS error | Origin mismatch or trailing slash in `CORS_ALLOWED_ORIGINS`; update it and let Render restart the service. |
 | Vercel still calls the old URL | Environment variables are baked at build time; redeploy after editing them. |

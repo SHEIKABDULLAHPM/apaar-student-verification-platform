@@ -48,7 +48,9 @@ spring:
       enabled: false
 
 server:
-  port: ${BACKEND_PORT:8080}
+  # Hosting platforms such as Render inject PORT; BACKEND_PORT remains the local
+  # and Docker Compose setting.
+  port: ${PORT:${BACKEND_PORT:8080}}
   shutdown: graceful
   forward-headers-strategy: framework
   error:

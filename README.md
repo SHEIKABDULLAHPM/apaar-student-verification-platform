@@ -143,3 +143,4 @@ Detailed architectural and design specifications are maintained in the [`docs/`]
 - [`docs/INTEGRATIONS.md`](./docs/INTEGRATIONS.md) — APAAR Adapter interface, simulated adapter rules, and sandbox plan.
 - [`docs/TESTING.md`](./docs/TESTING.md) — Test pyramid, execution commands, and verified status.
 - [`docs/IMPLEMENTATION_PLAN.md`](./docs/IMPLEMENTATION_PLAN.md) — Ordered 8-stage roadmap across all 7 solution components.
+- [`docs/DEPLOY_VERCEL_RENDER.md`](./docs/DEPLOY_VERCEL_RENDER.md) — Deploying the frontend to Vercel and the backend + PostgreSQL to Render.
